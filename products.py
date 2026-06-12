@@ -18,6 +18,8 @@ class Product:
         self.quantity = quantity
         if self.quantity == 0:
             self.deactivate()
+        else:
+            self.activate()
 
     def is_active(self):
         return self.active
@@ -31,7 +33,9 @@ class Product:
     def show(self):
         print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
 
-    def buy (self, quantity):
+    def buy(self, quantity):
+        if not self.active:
+            raise ValueError("Produkt ist nicht aktiv")
         if quantity > self.quantity:
             raise ValueError("Nicht genug auf Lager")
         self.set_quantity(self.quantity - quantity)

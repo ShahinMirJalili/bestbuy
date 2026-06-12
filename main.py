@@ -30,6 +30,9 @@ def make_order(store_obj):
             break
         try:
             product = all_products[int(product_choice) - 1]
+            if int(amount) > product.get_quantity():
+                print("Nicht genug auf Lager, try again!\n")
+                continue
             shopping_list.append((product, int(amount)))
             print("Product added to list!\n")
         except (ValueError, IndexError):
